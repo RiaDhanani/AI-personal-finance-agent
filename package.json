@@ -1,0 +1,28 @@
+{
+  "name": "finance-ai-agent",
+  "version": "1.0.0",
+  "description": "Personal finance AI agent with MCP integration",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "mcp": "node src/mcp/server.js",
+    "sync": "node src/commands/sync.js",
+    "categorize": "node src/commands/categorize.js",
+    "report": "node src/commands/report.js",
+    "dashboard": "node src/dashboard/server.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "openai": "^4.77.0",
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "axios": "^1.7.9",
+    "better-sqlite3": "^11.7.0",
+    "dotenv": "^16.4.7",
+    "exceljs": "^4.4.0",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.10.2"
+  }
+}

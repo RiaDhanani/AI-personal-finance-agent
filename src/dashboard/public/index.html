@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Finance Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-left">
+        <div class="logo">💰</div>
+        <div>
+          <h1>Personal Finance Dashboard</h1>
+          <div class="subtitle">AI-powered expense tracking and analysis</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="btn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+        <button class="btn" onclick="exportCSV()" title="Export to CSV">📥 Export CSV</button>
+      </div>
+    </header>
+
+    <div class="stats-grid" id="stats">
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-icon">📊</span>
+          <span>Total Expenses</span>
+        </div>
+        <div class="stat-value" id="totalExpenses">-</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-icon">💸</span>
+          <span>This Month</span>
+        </div>
+        <div class="stat-value" id="currentMonthTotal">$0</div>
+        <div class="stat-trend" id="monthTrend"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-icon">🎯</span>
+          <span>Top Category</span>
+        </div>
+        <div class="stat-value" id="topCategory" style="font-size: 24px;">-</div>
+        <div class="stat-trend" id="topCategoryAmount"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-header">
+          <span class="stat-icon">📅</span>
+          <span>Months Tracked</span>
+        </div>
+        <div class="stat-value" id="monthsTracked">-</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom: 20px;">
+      <div class="controls">
+        <label for="monthSelect" style="font-weight: 500;">Select Month:</label>
+        <select id="monthSelect">
+          <option value="">Loading...</option>
+        </select>
+        <button class="btn-primary" onclick="loadSummary()">View Summary</button>
+      </div>
+    </div>
+
+    <div class="main-content">
+      <div class="card">
+        <div class="total-amount" id="totalAmount">$0.00</div>
+        <div class="period-label" id="periodLabel">Total spent in -</div>
+        <div class="transaction-count" id="transactionCount">0 transactions</div>
+
+        <!-- Recent Transactions Section -->
+        <div class="recent-section">
+          <div class="section-title">
+            <span>⏱️</span>
+            <span>Recent Transactions</span>
+          </div>
+          <div id="recentTransactions" class="recent-list">
+            <div class="loading-small">Select a month to view</div>
+          </div>
+        </div>
+
+        <!-- Category Breakdown Section -->
+        <div class="category-section">
+          <div class="section-title">
+            <span>📊</span>
+            <span>Spending by Category</span>
+          </div>
+          <div class="category-list" id="categoryList">
+            <!-- Categories will be populated here -->
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Category Breakdown</div>
+        <div class="pie-chart-container">
+          <canvas id="pieChart" width="250" height="250"></canvas>
+          <div class="chart-center-text">
+            <div class="center-percentage" id="centerPercentage">100%</div>
+            <div class="center-label" id="centerLabel">Total</div>
+          </div>
+        </div>
+        <div class="chart-legend" id="chartLegend"></div>
+      </div>
+    </div>
+
+    <div class="card top-expenses-card">
+      <div class="card-title">
+        <span class="card-icon">📋</span>
+        <span>Top 5 Expenses</span>
+      </div>
+      <table id="topExpensesTable">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th style="text-align: right;">Amount</th>
+          </tr>
+        </thead>
+        <tbody id="topExpensesBody">
+          <tr><td colspan="4" class="loading">Select a month to view expenses</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Category Detail Modal -->
+    <div class="modal-overlay" id="categoryModal" onclick="closeModal(event)">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <div class="modal-title">
+            <div class="modal-category-color" id="modalCategoryColor"></div>
+            <h3 id="modalCategoryName">Category Details</h3>
+          </div>
+          <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-stats">
+          <div class="modal-stat">
+            <span class="modal-stat-label">Total Spent</span>
+            <span class="modal-stat-value" id="modalTotal">$0.00</span>
+          </div>
+          <div class="modal-stat">
+            <span class="modal-stat-label">Transactions</span>
+            <span class="modal-stat-value" id="modalCount">0</span>
+          </div>
+          <div class="modal-stat">
+            <span class="modal-stat-label">Average</span>
+            <span class="modal-stat-value" id="modalAverage">$0.00</span>
+          </div>
+        </div>
+        <div class="modal-body">
+          <table class="modal-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th style="text-align: right;">Amount</th>
+              </tr>
+            </thead>
+            <tbody id="modalTableBody">
+              <!-- Populated dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
