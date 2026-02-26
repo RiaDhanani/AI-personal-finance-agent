@@ -177,21 +177,6 @@ For better results:
 }
 ```
 
-## Temperature Setting
-
-The AI uses `temperature: 0.3` for categorization:
-- Lower temperature = more consistent, predictable results
-- Ensures same expense gets same category
-- Reduces randomness in decision-making
-
-## Model Choice
-
-Uses `claude-sonnet-4-20250514`:
-- Fast and cost-effective
-- Excellent at structured tasks
-- Good at following strict schemas
-- Reliable JSON output
-
 ## Testing Categorization
 
 To test the categorization logic:

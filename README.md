@@ -1,8 +1,8 @@
-# 💰 Personal Finance AI Agent
+# Personal Finance AI Agent
 
 An AI-powered expense tracking and categorization system that connects to Splitwise, uses Open AI to automatically categorize expenses, and generates professional Excel reports and a dashboard to visualize transactions.
 
-## 🌟 Features
+## Features
 
 - **Splitwise Integration**: Automatically sync expenses from your Splitwise account
 - **AI Categorization**: Uses Open AI to intelligently categorize expenses
@@ -12,13 +12,13 @@ An AI-powered expense tracking and categorization system that connects to Splitw
 - **Web Dashboard**: Web interface to view your spending analytics
 - **SQLite Storage**: Lightweight, portable database with no setup required
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Node.js 18 or higher
 - Splitwise account with API access
 - OpenAI API key
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Clone and Install
 
@@ -76,29 +76,15 @@ Interactive CLI to generate Excel reports:
 
 Reports are saved to `./exports/`
 
-## 📊 Expense Categories
-
-The AI categorizes expenses into these predefined categories:
-
-- Food & Dining
-- Groceries
-- Rent
-- Utilities
-- Transport
-- Travel
-- Entertainment
-- Shopping
-- Health
-- Subscriptions
-- Other
-
-## 🔧 MCP Server
+## MCP Server
 
 The MCP server can be started with the following command:
 
 ```bash
 npm run mcp
 ```
+
+
 
 ### Available Tools
 
@@ -126,7 +112,7 @@ Add to your Claude Desktop config (`~/Library/Application Support/Claude/claude_
 }
 ```
 
-## 🌐 Web Dashboard
+## Web Dashboard
 
 Launch a local web dashboard to visualize your spending:
 
@@ -136,71 +122,8 @@ npm run dashboard
 
 Then open http://localhost:3000 in your browser.
 
-Features:
-- Overall spending statistics
-- Monthly category breakdowns
-- Top expenses visualization
-- Interactive month selection
-
-## 📁 Project Structure
-
-```
-finance-agent/
-├── src/
-│   ├── commands/           # CLI commands
-│   │   ├── sync.js        # Splitwise sync
-│   │   ├── categorize.js  # AI categorization
-│   │   └── report.js      # Report generation
-│   ├── dashboard/         # Web dashboard
-│   │   ├── server.js      # Express server
-│   │   └── public/        # Static assets
-│   ├── db/                # Database layer
-│   │   └── database.js    # SQLite models
-│   ├── mcp/               # MCP server
-│   │   └── server.js      # Tool definitions
-│   └── services/          # Business logic
-│       ├── splitwise.js   # Splitwise client
-│       ├── categorization.js  # AI service
-│       ├── aggregation.js     # Analytics
-│       └── excel.js           # Excel exports
-├── data/                  # SQLite database
-├── exports/              # Generated reports
-├── package.json
-└── .env                  # Your credentials
-```
-
-## 🗄️ Database Schema
-
-### `expenses` table
-- Core expense data from Splitwise
-- AI categorization results
-- Confidence scores and reasoning
-
-### `category_cache` table
-- Caches categorization results
-- Reduces API calls for similar expenses
-- Tracks cache hit counts
-
-### `sync_metadata` table
-- Stores sync timestamps
-- Other system metadata
-
-## 🔐 Security & Privacy
-
-- All API keys stored in environment variables
-- Database stored locally
-- No expense data sent to external services except Open API for categorization
-- Gitignore configured to prevent accidental commits of sensitive data
-
-## 🛠️ Development
-
-### Running in Development Mode
-
-```bash
-npm run dev
-```
-
-Uses Node's `--watch` flag for auto-reload.
+![Dashboard light theme](src/assets/dashboard_light.png)
+![Dashboard dark theme](src/assets/dashboard_dark.png)
 
 ### Database Location
 
@@ -214,12 +137,12 @@ To use a different location, set `DATABASE_PATH` in `.env`
 - CLI commands provide verbose output
 - Check `./data/` for database file
 
-## 📈 Usage Examples
+## Usage Examples
 
 ### Daily Workflow
 
 ```bash
-# Morning: sync new expenses
+# sync new expenses
 npm run sync
 
 # Categorize any new expenses
@@ -238,6 +161,8 @@ Once MCP is configured, you can ask Claude:
 > "Show me my top 5 expenses this month"
 > "Export my January spending to Excel"
 
+![Claude Desktop chat example](src/assets/claude_chat.png)
+
 ## 🔄 Incremental Syncs
 
 The sync command automatically tracks the last sync date. Subsequent syncs only fetch new expenses, making it fast and efficient.
@@ -245,17 +170,6 @@ The sync command automatically tracks the last sync date. Subsequent syncs only 
 To force a full resync:
 1. Delete `./data/finance.db`
 2. Run `npm run sync`
-
-## 📊 Excel Report Features
-
-Monthly reports include:
-- **Sheet 1**: All transactions with categories and confidence scores
-- **Sheet 2**: Monthly summary with category breakdown and top expenses
-
-Year-to-date reports include:
-- Overall YTD statistics
-- Category totals across all months
-- Monthly trend analysis
 
 ---
 
@@ -265,10 +179,6 @@ Where to find everything:
 - Architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 - Categorization details: [docs/CATEGORIZATION.md](docs/CATEGORIZATION.md)
 
-## 🤝 Contributing
+## Contributing
 
 This is a personal finance tool, but feel free to fork and customize for your needs!
-
-## 📝 License
-
-MIT

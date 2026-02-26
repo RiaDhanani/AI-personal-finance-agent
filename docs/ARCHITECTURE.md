@@ -285,63 +285,6 @@ CREATE TABLE sync_metadata (
 7. Claude receives and presents to user
 ```
 
-## Design Patterns
-
-### 1. Repository Pattern
-- `ExpenseModel`, `CategoryCacheModel`, `MetadataModel`
-- Abstracts database operations
-- Single source of truth for queries
-
-### 2. Service Layer Pattern
-- Business logic separated from data access
-- Reusable across CLI, MCP, and Web interfaces
-- Testable independently
-
-### 3. Singleton Pattern
-- Database connection (better-sqlite3)
-- One connection, multiple queries
-- WAL mode for concurrency
-
-### 4. Caching Pattern
-- Category cache with TTL (never expires)
-- Hit count tracking
-- Cache key normalization
-
-## Technology Choices
-
-### Why Node.js?
-- Native async/await for API calls
-- Excellent library ecosystem
-- Easy MCP SDK integration
-- Fast JSON processing
-
-### Why SQLite?
-- Zero configuration
-- File-based (portable)
-- ACID transactions
-- Fast for personal data volumes
-- No separate server process
-
-### Why better-sqlite3?
-- Synchronous API (simpler code)
-- Faster than node-sqlite3
-- Better error handling
-- Native bindings for performance
-
-### Why ExcelJS?
-- Full Excel feature support
-- Formulas and formatting
-- Multiple sheets
-- No external dependencies
-- Cross-platform
-
-### Why Claude Sonnet 4?
-- Excellent structured output
-- Fast response times
-- Good at classification
-- Reliable JSON formatting
-- Cost-effective for this use case
-
 ## Security Considerations
 
 ### 1. API Key Management
@@ -400,19 +343,13 @@ db.pragma('journal_mode = WAL');
 2. **Excel file size**: Large exports may be slow
 3. **Memory**: All-in-memory aggregation
 
-### Future Scaling Options
-- PostgreSQL for multi-user
-- Background job queue for categorization
-- Streaming Excel generation
-- API response caching
-
 ## Error Handling
 
 ### Levels of Error Handling
 
 1. **API Level**
    - Splitwise API errors → retry logic
-   - Anthropic API errors → fallback to "Other" category
+   - OpenAI API errors → fallback to "Other" category
    - Network timeouts → user notification
 
 2. **Database Level**
@@ -425,24 +362,6 @@ db.pragma('journal_mode = WAL');
    - Missing data → sensible defaults
    - Invalid input → clear feedback
 
-## Testing Strategy
-
-### Unit Tests (Recommended)
-- Service methods
-- Database models
-- Normalization functions
-- Cache key generation
-
-### Integration Tests
-- Splitwise API mocking
-- Database transactions
-- MCP tool calls
-
-### End-to-End Tests
-- Full sync → categorize → report workflow
-- CLI command execution
-- Excel file validation
-
 ## Deployment
 
 ### Local Development
@@ -453,26 +372,14 @@ cp .env.example .env
 npm run sync
 ```
 
-### Production Considerations
-- Backup database regularly
-- Rotate API keys periodically
-- Monitor API usage/costs
-- Set up log rotation
-
 ## Monitoring
 
 ### Metrics to Track
 - Sync success rate
 - Categorization cache hit rate
 - Average confidence scores
-- API costs (Anthropic)
+- API costs (OpenAI)
 - Report generation time
-
-### Logs
-- Sync timestamps
-- Categorization progress
-- API errors
-- Database queries (optional)
 
 ## Future Architecture Improvements
 

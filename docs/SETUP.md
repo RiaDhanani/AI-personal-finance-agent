@@ -63,10 +63,10 @@ Complete step-by-step guide to get your Personal Finance AI Agent running.
 
    Security note: the script prints the token to stdout for convenience — treat it like a secret and do not commit it to version control.
 
-## Step 2: Get Anthropic API Key
+## Step 2: Get OpenAI API Key
 
 1. **Sign Up for Anthropic**
-   - Go to https://console.anthropic.com/
+   - Go to https://platform.openai.com/api-keys
    - Sign up or log in
 
 2. **Create API Key**
@@ -287,7 +287,7 @@ Select month (1-3): 1
 - Sheet 1: All transactions with categories
 - Sheet 2: Monthly summary and top expenses
 
-## Step 9: (Optional) Set Up MCP Server
+## Step 9: Set Up MCP Server
 
 For use with Claude Desktop or other MCP clients:
 
@@ -340,7 +340,7 @@ In Claude Desktop, try:
 
 Claude should respond with the list of categories.
 
-## Step 10: (Optional) Launch Web Dashboard
+## Step 10: Launch Web Dashboard
 
 ```bash
 npm run dashboard
@@ -360,7 +360,6 @@ npm run dashboard
 
 Once set up, your typical workflow:
 
-### Morning Routine
 ```bash
 # Sync new expenses
 npm run sync
