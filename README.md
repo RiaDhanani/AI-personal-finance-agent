@@ -122,9 +122,10 @@ npm run dashboard
 
 Then open http://localhost:3000 in your browser.
 
-![Dashboard light theme](src/assets/dashboard_light.png)
-
-![Dashboard dark theme](src/assets/dashboard_dark.png)
+<p style="display:flex;gap:12px;align-items:flex-start;">
+  <img src="src/assets/dashboard_light.png" alt="Dashboard light theme" style="max-width:48%;height:auto;">
+  <img src="src/assets/dashboard_dark.png" alt="Dashboard dark theme" style="max-width:48%;height:auto;">
+</p>
 
 ### Database Location
 
